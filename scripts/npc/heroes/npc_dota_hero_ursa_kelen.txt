@@ -1,0 +1,30 @@
+//=================================================================================================================
+// HERO: Kelen
+//=================================================================================================================
+ "npc_dota_hero_ursa_kelen"
+    { 
+        "override_hero"     "npc_dota_hero_broodmother" 
+		"AbilityLayout"     "4"       		
+        "Ability1"          "kelen_camouflage_lua"                                   
+	"Ability2"			"kelen_mug_lua"
+	"Ability3"			"kelen_stash_lua"
+	"Ability4"			"kelen_item_steal_lua"
+	"Ability5"          "kelen_criminal_scum_lua" 
+	
+        "ArmorPhysical"     "0.1"
+
+        "AttackDamageMin"     "34"                   // Damage range min.
+        "AttackDamageMax"     "47"                   // Damage range max.
+ 
+
+        "AttributeBaseStrength"   "20"                   // Base strength
+        "AttributeStrengthGain"   "2.05"                   // Strength bonus per level.
+        "AttributeBaseIntelligence" "17"                   // Base intelligence
+        "AttributeIntelligenceGain" "1.35"                   // Intelligence bonus per level.
+        "AttributeBaseAgility"    "21"                   // Base agility
+        "AttributeAgilityGain"    "3.9"                   // Agility bonus per level.
+
+        "MovementSpeed"       "325"                 // Speed.
+
+
+    }
