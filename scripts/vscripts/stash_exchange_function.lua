@@ -8,9 +8,10 @@ caster:SwapItems(slot3, slot8)
 caster:SwapItems(slot4, slot9)
 caster:SwapItems(slot5, slot10)
 caster:SwapItems(slot6, slot11)
+end
 
 	
-function Hidden Stash
+function Hidden( keys )
 local caster = keys.caster
 	local ability = keys.ability
 for itemSlot=6,11, 1 do
@@ -22,7 +23,7 @@ local item = target:GetItemInSlot(itemSlot)
  if caster:HasModifier(i) = false
  then ability:ApplyModifier(caster, caster, "(i)", {})
  end
- function Passive Gold( keys )
+ function Gold( keys )
 	local caster = keys.caster
 	local ability = keys.ability
 	
@@ -31,4 +32,3 @@ local item = target:GetItemInSlot(itemSlot)
 				end	
 			end
 		end
-end
