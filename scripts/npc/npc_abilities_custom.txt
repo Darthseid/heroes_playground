@@ -1,7 +1,46 @@
 // Dota Heroes File
 "DOTAAbilities"
 {  
-        //=================================================================================================================
+//=================================================================================================================
+	// Attribute Bonus 
+	//=================================================================================================================
+	"attribute_bonus"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"attribute_bonus"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"attribute_bonus"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"%main_attribute_bonus"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"		"%main_attribute_bonus"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"			"%main_attribute_bonus"
+				}
+			}
+		}		
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"main_attribute_bonus"			"2 4 6 8 10 12 14 16 18 20"
+			}			
+		}
+	}        
+		//=================================================================================================================
         // Ability: Camouflage Lua
         //=================================================================================================================
         "kelen_camouflage_lua"
@@ -11,7 +50,7 @@
                 //-------------------------------------------------------------------------------------------------------------
                 "BaseClass"                                             "ability_datadriven"
                 "AbilityBehavior"                               "DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-                "AbilityTextureName"                    "bounty_hunter_wind_walk"
+                "AbilityTextureName"                    "treant_natures_guise"
                 "AbilityType"                                   "DOTA_ABILITY_TYPE_BASIC"
                
         // Precache
@@ -109,7 +148,7 @@
 												}           
                                                                                         "RunScript"
                                         {
-                                                                "ScriptFile"    "scripts/vscripts/camouflage_function_lua.lua"
+                                                                "ScriptFile"    "scripts/vscripts/camouflage_function.lua"
                                                                                 "Function"      "camouflage_stop"
                                         }
                 }
@@ -124,12 +163,12 @@
                        {
 								"RunScript"
                           {
-                          "ScriptFile"  "scripts/vscripts/camouflage_function_lua.lua"
+                          "ScriptFile"  "scripts/vscripts/camouflage_function.lua"
                           "Function"    "camouflage"
                           }
 						   "RunScript"
                           {
-                          "ScriptFile"  "scripts/vscripts/camouflage_function_lua.lua"
+                          "ScriptFile"  "scripts/vscripts/camouflage_function.lua"
                           "Function"    "camouflage_take_mana"
                           }
 					   }					   
@@ -184,16 +223,17 @@
         //-------------------------------------------------------------------------------------------------------------
         "AbilitySpecial"
         {
-                "01"
-                {
-                        "var_type"                              "FIELD_INTEGER"
-                        "bonus_gold_radius"             "815"
-                }
-                "02"
+		                "01"
                 {
                         "var_type"                              "FIELD_INTEGER"
                         "bonus_gold"                    "250"
                 }
+                "02"
+                {
+                        "var_type"                              "FIELD_INTEGER"
+                        "bonus_gold_radius"             "815"
+                }
+
                 "03"
                 {
                         "var_type"                              "FIELD_INTEGER"
@@ -204,12 +244,12 @@
         {
           "RunScript"
                 {
-          "ScriptFile"  "scripts/vscripts/kelen_criminal_scum_lua_script.lua"
+          "ScriptFile"  "scripts/vscripts/kelen_criminal_scum.lua"
           "Function"                    "Criminal"
                 }
           "RunScript"
                 {
-          "ScriptFile"  "scripts/vscripts/kelen_criminal_scum_lua_script.lua"
+          "ScriptFile"  "scripts/vscripts/kelen_criminal_scum.lua"
           "Function"                    "Scum"
                 }      
         }
@@ -224,7 +264,7 @@
         "BaseClass"                             "ability_datadriven"
         "AbilityType"                                   "DOTA_ABILITY_TYPE_BASIC"
         "AbilityBehavior"                               "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-        "AbilityTextureName"                    "slark_shadow_dance"
+        "AbilityTextureName"                    "vengefulspirit_nether_swap"
  
         // Time        
         //-------------------------------------------------------------------------------------------------------------
@@ -242,19 +282,19 @@
                 "01"
                 {
                         "var_type"                                      "FIELD_INTEGER"
-                        ""passive_gold_rate""           "0.5 0.4  0.3  0.2"
+                        "passive_gold_rate"          "0.5 0.4 0.3 0.2"
                 }
                
         }
         "RunScript"
         {
                         "ScriptFile"    "scripts/vscripts/stash_exchange_function.lua"
-                        "Function"              "Passive Gold"
+                        "Function"              "Gold"
         }                                      
         "RunScript"
         {
                         "ScriptFile"    "scripts/vscripts/stash_exchange_function.lua"
-                        "Function"              "Hidden Stash"
+                        "Function"              "Hidden"
         }              
         "OnSpellStart"
         {
@@ -275,7 +315,7 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                                             "ability_datadriven"
         "AbilityBehavior"                               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-   "AbilityTextureName"                 "skeleton_king_reincarnation"
+   "AbilityTextureName"                 				"slark_essence_shift"
    "AbilityType"                                        "DOTA_ABILITY_TYPE_BASIC"
  
         // Special
@@ -347,7 +387,7 @@
                                                       
                                 "RunScript"
                                 {
-                                        "ScriptFile"                    "scripts/vscripts/mug_function_armor_lua.lua"
+                                        "ScriptFile"                    "scripts/vscripts/mug_function_armor.lua"
                                         "Function"                              "modifier_mug_armor_on_attack_landed"
                                         "armor_loss"                                    "%armor_loss"
                                 }
@@ -368,7 +408,7 @@
                         {
                                 "RunScript"
                                 {
-                                        "ScriptFile"                    "scripts/vscripts/mug_function_armor_lua.lua"
+                                        "ScriptFile"                    "scripts/vscripts/mug_function_armor.lua"
                                         "Function"                              "modifier_mug_armor_datadriven_debuff_on_destroy"
                                 }
                         }
@@ -376,7 +416,7 @@
                 {
                         "RunScript"
                                 {
-                                        "ScriptFile"                    "scripts/vscripts/mug_function_gold_lua.lua"
+                                        "ScriptFile"                    "scripts/vscripts/mug_function_gold.lua"
                                         "Function"                              " mug_attack_gain"
                                         "gold_gain_percent"                                     "%gold_gain_percent"
                                 }
@@ -385,7 +425,7 @@
                 {
                         "RunScript"
                                 {
-                                        "ScriptFile"                    "scripts/vscripts/mug_function_gold_lua.lua"
+                                        "ScriptFile"                    "scripts/vscripts/mug_function_gold.lua"
                                         "Function"                              "mug_attack_loss"
                                         "gold_loss_percent"                                     "%gold_loss_percent"
                                 }
@@ -406,7 +446,7 @@
                         {
                                 "RunScript"
                                 {
-                                        "ScriptFile"                    "scripts/vscripts/mug_function_armor_lua.lua"
+                                        "ScriptFile"                    "scripts/vscripts/mug_function_armor.lua"
                                         "Function"                              "modifier_mug_armor_datadriven_debuff_on_destroy"
                                 }
                         }
@@ -426,7 +466,7 @@
         "AbilityUnitTargetTeam"                 "DOTA_UNIT_TARGET_TEAM_ENEMY"
         "AbilityUnitTargetType"                 "DOTA_UNIT_TARGET_HERO"
         "SpellImmunityType"                             "SPELL_IMMUNITY_ENEMIES_NO"
-        "AbilityTextureName"                    "drow_ranger_frost_arrows"
+        "AbilityTextureName"                    	"rubick_spell_steal"
         // Casting
         //-------------------------------------------------------------------------------------------------------------
         "AbilityCastRange"                              "100"
@@ -460,16 +500,16 @@
         {
                 "RunScript"
                 {
-                        "ScriptFile"    "scripts/vscripts/item_steal_function_lua.lua"
-                        "Function"              "Five Finger Discount"
+                        "ScriptFile"    "scripts/vscripts/item_steal_function.lua"
+                        "Function"              "Five"
                 }                                              
         }      
         "OnOwnerDied"
         {
                 "RunScript"
                 {
-                        "ScriptFile"    "scripts/vscripts/item_steal_function_lua"
-                        "Function"              "Red Handed"
+                        "ScriptFile"    "scripts/vscripts/item_steal_function.lua"
+                        "Function"              "Red"
                 }                                              
         }      
  }
