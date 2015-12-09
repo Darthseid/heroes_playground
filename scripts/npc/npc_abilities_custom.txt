@@ -1,45 +1,7 @@
 // Dota Heroes File
 "DOTAAbilities"
 {  
-//=================================================================================================================
-	// Attribute Bonus 
-	//=================================================================================================================
-	"attribute_bonus"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"attribute_bonus"
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"Modifiers"
-		{
-			"attribute_bonus"
-			{
-				"Passive"		"1"
-				"IsHidden"		"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"%main_attribute_bonus"
-					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"		"%main_attribute_bonus"
-					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"			"%main_attribute_bonus"
-				}
-			}
-		}		
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"						"FIELD_INTEGER"
-				"main_attribute_bonus"			"2 4 6 8 10 12 14 16 18 20"
-			}			
-		}
-	}        
+      
 		//=================================================================================================================
         // Ability: Camouflage Lua
         //=================================================================================================================
@@ -61,6 +23,7 @@
                                         "soundfile" "soundevents/game_sounds_heroes/game_sounds_bounty_hunter.vsndevts"
                                         "particle"  "particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf"
                                         "particle"  "particles/generic_hero_status/status_invisibility_start.vpcf"
+										"particle" "particles/sniper_r/sniper_r.vpcf"
                 }
        
                 // Casting
@@ -100,7 +63,7 @@
                         "05"
                         {
                         "var_type"                              "FIELD_INTEGER"
-                        "mana_cost_per_second"  "7 6 5 4"
+                        "mana_cost_per_second"  "-7 -6 -5 -4"
                         }
                         "06"
                     {
@@ -132,6 +95,11 @@
                                         "ModifierName"  "modifier_camouflage_datadriven"
 										 "Target"        "CASTER"
                                 }
+								"ApplyModifier"
+                                {                                     
+                                        "ModifierName"  "modifier_camouflage_mana_drain"
+										 "Target"        "CASTER"
+                                }
                             }
                         }
         }
@@ -149,11 +117,35 @@
                                                                                         "RunScript"
                                         {
                                                                 "ScriptFile"    "scripts/vscripts/camouflage_function.lua"
-                                                                                "Function"      "camouflage_stop"
+                                                                                "Function"      "modifier_sniper_r:GetModifierInvisibilityLevel(params)"
+                                        }
+										"RemoveModifier"
+												{
+							"ModifierName"    			"modifier_camouflage_mana_drain"
+														"Target"
+													{
+															"Center"    "CASTER"
+									"Flags"     			"DOTA_UNIT_TARGET_FLAG_DEAD"
+													}
+												}           
+                                                                                        "RunScript"
+                                        {
+                                                                "ScriptFile"    "scripts/vscripts/camouflage_function.lua"
+                                                                                "Function"      "modifier_sniper_r:GetModifierInvisibilityLevel(params)"
                                         }
                 }
                         "Modifiers"
         {                          
+			"modifier_camouflage_mana_drain"
+			{			
+						"IsHidden"                      "1"
+										"Properties"
+                        {
+                                "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"                "%mana_cost_per_second"
+                        }
+			}
+			
+			
                         "modifier_camouflage_datadriven"
                 {
                
@@ -164,7 +156,12 @@
 								"RunScript"
                           {
                           "ScriptFile"  "scripts/vscripts/camouflage_function.lua"
-                          "Function"    "camouflage"
+                          "Function"    "modifier_sniper_r:DeclareFunctions()"
+                          }
+						   "RunScript"
+                          {
+                          "ScriptFile"  "scripts/vscripts/camouflage_function.lua"
+                          "Function"    "modifier_sniper_r:CheckState()"
                           }
 						   "RunScript"
                           {
@@ -184,7 +181,13 @@
                                         "Target"        "CASTER"
                                         "ModifierName"  "modifier_invisible"
                                 }
-                        }               
+								"RunScript"
+                          {
+                          "ScriptFile"  "scripts/vscripts/camouflage_function.lua"
+                          "Function"    "camouflage_break"
+                          }
+                        }   
+            
                         "OnAbilityExecuted"
                         {
                                 "RemoveModifier"
@@ -197,6 +200,11 @@
                                         "Target"        "CASTER"
                                         "ModifierName"  "modifier_invisible"
                                 }
+								"RunScript"
+                          {
+                          "ScriptFile"  "scripts/vscripts/camouflage_function.lua"
+                          "Function"    "camouflage_break"
+                          }
                         }                                                                                
                         "States"                 
                         {
