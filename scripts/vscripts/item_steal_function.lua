@@ -1,4 +1,4 @@
-function Five Finger Discount( keys )
+function Five( keys )
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
@@ -7,15 +7,15 @@ function Five Finger Discount( keys )
 target:GetNumItemsinInventory()
 
 GetNumItemsinInventory = v
-math.random(0,v) = i
 
-
-for itemSlot = i, 1 do
+for itemSlot =  RandomInt( int 0, int v ) , = i, 1 do
 local item = target:GetItemInSlot(itemSlot)
  if item ~= nil then
  local itemName = itemGetName()
+ itemName:GetCurrentCharges = z
  local newItem = CreateItem(itemName, caster, target)
  
+itemName:SetCurrentCharges(z)
 caster:AddItem(itemName)
 target:RemoveItem(itemName)
 
@@ -26,7 +26,7 @@ itemName:IsCombinable = false
 
 end
 
-function Red Handed
+function Red( keys )
 local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
@@ -35,12 +35,12 @@ if caster:HasItemInInventory(itemName) then
 local item = caster:GetItemInSlot(itemSlot)
  if item ~= nil then
  local itemName = itemGetName()
+  itemName:GetCurrentCharges = z
  local newItem = CreateItem(itemName, caster, target)
-
  
 caster:RemoveItem(itemName)
+itemName:SetCurrentCharges(z)
 target:AddItem(itemName)
-
-
-end
-
+						end
+				end
+			end
