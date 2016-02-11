@@ -188,7 +188,7 @@
                           }
                         }   
             
-                        "OnAbilityExecuted"
+                         "OnAbilityExecuted"
                         {
                                 "RemoveModifier"
                                 {
