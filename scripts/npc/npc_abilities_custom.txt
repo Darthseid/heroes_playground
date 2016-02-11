@@ -290,30 +290,44 @@
                 "01"
                 {
                         "var_type"                                      "FIELD_INTEGER"
-                        "passive_gold_rate"          "0.5 0.4 0.3 0.2"
+                        "passive_gold_rate"          "4.0 3.0 2.0 1.0"
                 }
                
         }
-        "RunScript"
-        {
-                        "ScriptFile"    "scripts/vscripts/stash_exchange_function.lua"
-                        "Function"              "Gold"
-        }                                      
-        "RunScript"
-        {
-                        "ScriptFile"    "scripts/vscripts/stash_exchange_function.lua"
-                        "Function"              "Hidden"
-        }              
         "OnSpellStart"
-        {
+    {
                 "RunScript"
                 {
                         "ScriptFile"    "scripts/vscripts/stash_exchange_function.lua"
-                        "Function"              "Exchange"
-                }                                              
-        }      
+                        "Function"              "ReorderStash"
+                }         
+		  "RunScript"
+        {
+                        "ScriptFile"    "scripts/vscripts/stash_exchange_function.lua"
+                        "Function"              "ReorderInventory"
+        }              				
+    } 
+				 "Modifiers"
+				{ 
+					"modifier_stash_gold"
+                 {
+               
+                        "isBuff"        "1"
+						"IsPurgable"            "0"
+						   "Passive"                       "1"
+                        "ThinkInterval" "%passive_gold_rate"						
+						"OnIntervalThink"						
+						{  
+						 "RunScript"
+        {
+							"ScriptFile"    "scripts/vscripts/stash_exchange_function.lua"
+							"Function"              "Gold"
+        }        		
+						}
+                 }
+				}      		
+				
 }
- 
         //=================================================================================================================
         // Ability: Mug Lua
         //=================================================================================================================
@@ -509,15 +523,20 @@
                 "RunScript"
                 {
                         "ScriptFile"    "scripts/vscripts/item_steal_function.lua"
-                        "Function"              "Five"
+                        "Function"              "Swap"
                 }                                              
         }      
+		 "RunScript"
+                {
+                        "ScriptFile"    "scripts/vscripts/item_steal_function.lua"
+                        "Function"              "Keep"
+                }    
         "OnOwnerDied"
         {
                 "RunScript"
                 {
                         "ScriptFile"    "scripts/vscripts/item_steal_function.lua"
-                        "Function"              "Red"
+                        "Function"              "Drop"
                 }                                              
         }      
  }
