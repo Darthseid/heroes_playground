@@ -1,34 +1,53 @@
-function Exchange( keys )
-	local caster = keys.caster
-	local ability = keys.ability
+function ReorderInventory( keys )
+local caster = keys.caster
+	local target = keys.target
+    local slots = {}
+    for itemSlot = 0, 5, 1 do
 
-caster:SwapItems(slot1, slot6)
-caster:SwapItems(slot2, slot7)
-caster:SwapItems(slot3, slot8)
-caster:SwapItems(slot4, slot9)
-caster:SwapItems(slot5, slot10)
-caster:SwapItems(slot6, slot11)
+        -- Handle the case in which the caster is removed
+        local item
+        if IsValidEntity(caster) then
+            item = caster:GetItemInSlot( itemSlot )		
+        end
+		
+        if item ~= nil then
+            table.insert(slots, itemSlot)
+        end
+    end
+
+    for k,itemSlot in pairs(slots) do	
+        caster:SwapItems(itemSlot,k+6)
+    end
 end
 
-	
-function Hidden( keys )
+function ReorderStash( keys )
 local caster = keys.caster
-	local ability = keys.ability
-for itemSlot=6,11, 1 do
-local item = target:GetItemInSlot(itemSlot)
- if item ~= nil then
- local itemName = itemGetName()
- 
- itemName:GetModifierNameByIndex = i
- if caster:HasModifier(i) = false
- then ability:ApplyModifier(caster, caster, "(i)", {})
- end
+	local target = keys.target
+    local slots = {}
+    for itemSlot = 6, 11, 1 do
+
+        -- Handle the case in which the caster is removed
+        local item
+        if IsValidEntity(caster) then
+            item = caster:GetItemInSlot( itemSlot )
+		
+        end
+        if item ~= nil then		
+            table.insert(slots, itemSlot)
+        end		
+    end
+	
+    for k,itemSlot in pairs(slots) do
+        caster:SwapItems(itemSlot,k-6)		
+    end
+end
+
+
  function Gold( keys )
 	local caster = keys.caster
 	local ability = keys.ability
-	
-	Caster:SetGoldTickTime "passive_gold_rate"
+local gold_gain = 2		
+	caster:ModifyGold(gold_gain, true, 0)
 					end
-				end	
-			end
-		end
+			
+ 
