@@ -10,7 +10,7 @@
 		"Ability2"			"kelen_mug_lua"
 		"Ability3"			"kelen_stash_lua"
 		"Ability4"			"kelen_item_steal_lua"
-		"Ability5"          "kelen_criminal_scum_lua" 
+
 		
 	        "ArmorPhysical"     "0.1"
 	
