@@ -188,7 +188,7 @@
                           }
                         }   
             
-                         "OnAbilityExecuted"
+                        "OnAbilityExecuted"
                         {
                                 "RemoveModifier"
                                 {
@@ -338,7 +338,7 @@
         "BaseClass"                                             "ability_datadriven"
         "AbilityBehavior"                               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
    "AbilityTextureName"                 				"slark_essence_shift"
-   "AbilityType"                                        "DOTA_ABILITY_TYPE_BASIC"
+ 
  
         // Special
         //-------------------------------------------------------------------------------------------------------------
@@ -352,12 +352,12 @@
                 "02"
                 {
                         "var_type"                              "FIELD_INTEGER"
-                        "armor_loss"                            "-1"
+                        "armor_loss"                            "-1 -1 -1 -1"
                 }
                 "03"
                 {
                         "var_type"                              "FIELD_FLOAT"
-                        "duration"                              "6 9 12 15"
+                        "duration"                              "18 27 36 45"
                 }
                         "04"
                 {
@@ -365,37 +365,6 @@
                         "gold_loss_percent"                             "-5 -10 -15 -20"
                 }
         }
-       
-                        "OnAttackLanded"
-{
-                                "ApplyModifier"
-                {
-                        "Target"
-                        {
-                        "Center"  "TARGET"
-                        "Type" "DOTA_UNIT_TARGET_BASIC"
-                        }
-                       
-                                        "ModifierName"  "modifier_mug_armor_datadriven"
-                                        "Duration" "%duration"
-                }
- 
-                        "ApplyModifier"
-        {
-                        "Target"
-                {
-                        "Center" "TARGET"
-                        "Type" "DOTA_UNIT_TARGET_HERO"
-                }
-                        "ModifierName"  "modifier_mug_gold_datadriven_loss"
-        }
-                        "ApplyModifier"
-        {
-                        "Target"        "ATTACKER"
-                        "ModifierName"  "modifier_mug_gold_datadriven_gain"
-        }
-}
- 
                        
         "Modifiers"
         {              
@@ -405,28 +374,33 @@
                        
                                 "modifier_mug_armor_datadriven"
 						{
-                                                        "IsHidden"           "0"
-                                                      
-                                "RunScript"
+                                                        "IsHidden"           "1"
+                                                         "Passive"                       "1"
+                                                         "IsDebuff"                      "1"
+                                                          "IsPurgable"            "1"
+                                    "OnAttackLanded"
+                                    // "%attack_damage" is set to the damage value before mitigation
+                                    {
+                                        "RunScript"
                                 {
                                         "ScriptFile"                    "scripts/vscripts/mug_function_armor.lua"
                                         "Function"                              "modifier_mug_armor_on_attack_landed"
                                         "armor_loss"                                    "%armor_loss"
                                 }
+                                    }                    
+                                                      
+                                
                         }
                
                 "modifier_mug_debuff_counter"  
                 {
                         "Duration"                      "%duration"
                         "Passive"                       "0"
-                        "IsHidden"                      "0"
+                        "IsHidden"                      "1"
                         "isBuff"                        "0"
                         "IsDebuff"                      "1"
                         "IsPurgable"            "0"
-                }
- 
-                       
-                        "OnDestroy"  //Decrement the visible counter.
+                            "OnDestroy"  //Decrement the visible counter.
                         {
                                 "RunScript"
                                 {
@@ -434,31 +408,34 @@
                                         "Function"                              "modifier_mug_armor_datadriven_debuff_on_destroy"
                                 }
                         }
-                "modifier_mug_gold_datadriven_gain"
-                {
-                        "RunScript"
-                                {
-                                        "ScriptFile"                    "scripts/vscripts/mug_function_gold.lua"
-                                        "Function"                              " mug_attack_gain"
-                                        "gold_gain_percent"                                     "%gold_gain_percent"
-                                }
                 }
+                                       
                 "modifier_mug_gold_datadriven_loss"
                 {
-                        "RunScript"
+															"IsHidden"           "1"
+                                                         "Passive"                       "1"
+                                                         "IsDebuff"                      "1"
+                                                          "IsPurgable"            "1"
+                                            "OnAttackLanded"
+                                            // "%attack_damage" is set to the damage value before mitigation
+                                            {
+                                                "RunScript"
                                 {
                                         "ScriptFile"                    "scripts/vscripts/mug_function_gold.lua"
-                                        "Function"                              "mug_attack_loss"
+                                        "Function"                              "mug_attack_steal"
                                         "gold_loss_percent"                                     "%gold_loss_percent"
+										"gold_gain_percent"							"%gold_gain_percent"
+										"Damage" 									"%attack_damage" 
                                 }
+                                            }
                 }
                 "modifier_mug_armor_datadriven_debuff"
                 {
                         "Duration"                              "%duration"
                         "Passive"                               "0"
-                        "IsHidden"                      "1"
+                        "IsHidden"                      "0"
                         "Attributes"                    "MODIFIER_ATTRIBUTE_MULTIPLE"
-                       
+                       "IsPurgable"            "1"
                         "Properties"
                         {
                                 "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"                "%armor_loss"
