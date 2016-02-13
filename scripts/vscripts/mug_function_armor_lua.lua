@@ -11,10 +11,10 @@ function modifier_mug_armor_on_attack_landed(keys)
 		keys.ability:ApplyDataDrivenModifier(keys.caster, keys.target, "modifier_mug_debuff_counter", nil)
 		keys.target:SetModifierStackCount("modifier_mug_debuff_counter", keys.caster, previous_stack_count + 1)		
 		
-		
+	
 		local i = 0
-		local armor_loss_abs = math.abs(keys.ArmorLoss)
-		keys.ability:ApplyDataDrivenModifier(keys.caster, keys.target, ""modifier_mug_armor_datadriven_debuff", nil)
+		local armor_loss_abs = math.abs(keys.armor_loss)
+		keys.ability:ApplyDataDrivenModifier(keys.caster, keys.target, "modifier_mug_armor_datadriven_debuff", nil)
 			i = i + 1
 		end
 
