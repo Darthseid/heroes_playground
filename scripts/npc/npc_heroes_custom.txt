@@ -42,7 +42,14 @@
 
 			
 	        "MovementSpeed"       "288"                 // Speed.
+	         "ArmorPhysical"     "0"
 	
+	 "AttributeBaseStrength"   "32"                   // Base strength
+	        "AttributeStrengthGain"   "1.80"                   // Strength bonus per level.
+	        "AttributeBaseIntelligence" "21"                   // Base intelligence
+	        "AttributeIntelligenceGain" "2.0"                   // Intelligence bonus per level.
+	        "AttributeBaseAgility"    "12"                   // Base agility
+	        "AttributeAgilityGain"    "2.3"                   // Agility bonus per level.
 	    }
 	      //=================================================================================================================
 	// HERO: Munchkin
