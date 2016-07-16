@@ -974,16 +974,21 @@
 			"vision_radius"			"1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000"
 		}
 		//Extra
-		"11"
+		"09"
 		{
 			"var_type"				"FIELD_FLOAT"
 			"jump_interval"			"0.2"
 		}
-		"02"
+		"10"
 		{
 			"var_type"				"FIELD_FLOAT"
 			"break_duration"				"0.4 0.8 1.2 1.6 2.0 2.4 2.8 3.2 3.6 4.0 4.4 4.8 5.2 5.6 6.0 6.4 6.8 7.2 7.6 8.0"
-		}		
+		}
+		"11"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"duration"				"2.0 4.0 6.0 8.0 10.0 12.0 14.0 16.0 18.0 20.0 22.0 24.0 26.0 28.0 30.0 32.0 34.0 36.0 38.0 40.0"
+		}
 	}
 
 	}
@@ -994,6 +999,21 @@
 		"particle"	"particles/units/heroes/hero_bristleback/bristleback_back_dmg.vpcf"
 		"soundfile"	"soundevents/game_sounds_heroes/game_sounds_bristleback.vsndevts"
 	}
+	"OnSpellStart"
+	{
+		"FireSound"
+		{
+			"EffectName"	"Hero_Broodmother.InsatiableHunger"
+			"Target"		"CASTER"
+		}
+
+		"ApplyModifier"
+		{
+			"ModifierName"	"modifier_shield_collect"
+			"Target"		"CASTER"
+		}
+	}
+
 	"OnProjectileHitUnit"
 	{
 		"DeleteOnHit"	"1"
@@ -1011,7 +1031,7 @@
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"heroes/hero_lich/chain_frost.lua"
+					"ScriptFile"	"scripts/vscripts/munchkin_shield_jump.lua"
 					"Function"		"ChainFrost"
 					"Target"
 					{
@@ -1044,18 +1064,21 @@
 			    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow_attack_speed" 
 			}
 		}
-	}
-}
-		"modifier_bristleback"
+	
+		"modifier_shield_collect"
 		{
-			"Passive"	"0"
+	              	"Duration"	"%duration"
+			"IsBuff"	"1"
+
+			"EffectName"	"particles/units/heroes/hero_broodmother/broodmother_hunger_buff.vpcf"
+			"EffectAttachType"	"follow_origin"
 			"IsHidden"	"1"
 
 			"OnTakeDamage"
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"scripts/vscripts/heroes/hero_bristleback/bristleback.lua"
+					"ScriptFile"	"scripts/vscripts/munchkin_shield_store.lua"
 					"Function"		"bristleback_takedamage"
 					"Damage"		"%attack_damage"
 					"back_particle"	"particles/units/heroes/hero_bristleback/bristleback_back_dmg.vpcf"
@@ -1063,5 +1086,23 @@
 					"sound"			"Hero_Bristleback.Bristleback"
 				}		
 			}
+			
 		}
+		"OnDestroy"
+		{
+		"TrackingProjectile"
+		{
+			"Target"           	"Caster"
+			"EffectName"		"particles/units/heroes/hero_lich/lich_chain_frost.vpcf"
+			"Dodgeable"			"1"
+			"ProvidesVision"	"1"
+			"VisionRadius"		"%vision_radius"
+			"MoveSpeed"        	"%projectile_speed"
+			"SourceAttachment"	"DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+		}
+	}
+	}
+}
+
+	
 
