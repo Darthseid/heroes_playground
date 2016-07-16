@@ -1046,10 +1046,6 @@
 		}
 	}
 }
-
-
-	"Modifiers"
-	{
 		"modifier_bristleback"
 		{
 			"Passive"	"0"
@@ -1068,6 +1064,4 @@
 				}		
 			}
 		}
-	}
-}
-}
+
