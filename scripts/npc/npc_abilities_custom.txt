@@ -1102,6 +1102,60 @@
 		}
 	}
 	}
+	"munchkin_power_level_datadriven"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"						"ability_datadriven"
+ 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityType"                                   "DOTA_ABILITY_TYPE_ULTIMATE"
+	"AbilityTextureName"			"pudge_flesh_heap"
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"xp_multiplier_allies"			"0.34 0.67 1"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+		"xp_multiplier_munchkin"			"3.4 6.7 10"
+		}
+		"03"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"aura_radius"				"901"
+		}
+	}
+	"Modifiers"
+	{
+		"modifier_power_level_datadriven"
+		{
+			"Passive"			"1"
+			"IsHidden"			"1"
+				"RunScript"
+		{
+			"ScriptFile"			"items/item_hand_of_midas.lua"
+			"Function"				"item_hand_of_midas_datadriven_on_spell_start"
+			"XPMultiplier_allies"			"%xp_multiplier_allies"
+			"XPMultiplier_munchkin"			"%xp_multiplier_munchkin
+		}
+        	}
+        "modifier_munchkin_power_level_emitter"
+		{
+			"Passive"				"1"
+			"IsHidden"				"1"
+			
+			"Aura" 					"modifier_power_level_aura"
+			"Aura_Radius" 			"%aura_radius"
+			"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+			"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+			"Aura_ApplyToCaster" 	"0"
+			
+	}
+}
+
 }
 
 	
