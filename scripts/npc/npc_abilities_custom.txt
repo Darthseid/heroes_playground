@@ -1136,10 +1136,10 @@
 			"IsHidden"			"1"
 				"RunScript"
 		{
-			"ScriptFile"			"items/item_hand_of_midas.lua"
+			"ScriptFile"			"scripts/vscripts/munchkin_power_level.lua"
 			"Function"				"item_hand_of_midas_datadriven_on_spell_start"
 			"XPMultiplier_allies"			"%xp_multiplier_allies"
-			"XPMultiplier_munchkin"			"%xp_multiplier_munchkin
+			"XPMultiplier_munchkin"			"%xp_multiplier_munchkin"
 		}
         	}
         "modifier_munchkin_power_level_emitter"
