@@ -1,159 +1,141 @@
 "DOTAAbilities"
 {
-	//=================================================================================================================
-	// Arcane Boots II
-	//=================================================================================================================
-	"item_arcane_boots2"
-	{
-		"ID"							"1006"
-	
-		// General
+"item_recipe_explosive_banjo" 
+{
+    "ID" "2400"
+    "BaseClass"           "item_datadriven"
+    "ItemRecipe"          "1" //destroyed after combine
+    "ItemCost"            "345" //if its 0, it will combine without needing a recipe.
+    "ItemResult"          "item_explosive_banjo" //the result of combining the ItemRequirements
+    "ItemRequirements"
+    {
+        "01" "item_janggo;item_armlet;item_recipe_explosive_banjo"
+    }
+}
+"item_explosive_banjo" 
+{
+    "ID"           "3201"
+    "BaseClass"    "item_datadriven"
+    "AbilityTextureName" "item_rapier"
+    "Model"        "models/props_gameplay/recipe.vmdl" 
+    "Effect"       "particles/generic_gameplay/dropped_item.vpcf"
+    "ItemQuality"  "artifact"
+
+    "ItemCost"     "4500"
+    "ItemKillable" "1" 
+    "ItemSellable" "1"
+    "ItemPurchasable" "1"
+    "ItemDroppable" "1"
+    "ItemShareability" "ITEM_NOT_SHAREABLE"
+
+    "SideShop"     "0" 
+    "SecretShop"   "0"
+
+    "ItemStackable" "1"
+    "ItemPermanent" "1"
+    "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+    // Stats		
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"						"item_arcane_boots"
-	
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"55.0"
-	
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"0.2"
 		"AbilityManaCost"				"25"
-		"ItemCost"						"2450"
-		"ItemShopTags"					"move_speed;boost_mana;mana_pool"
-		"ItemQuality"					"rare"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
-		"ItemDisassembleRule"			"0"
-		"ItemAlertable"					"1"
-		"ItemAliases"					"mana;mb"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
+
+    "AbilitySpecial"
+    {
+        "01"
 		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_movement"		"75"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_mana"			"500"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"replenish_radius"		"600"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"replenish_amount"		"250"
-			}
+			"var_type"					"FIELD_INTEGER"
+			"splash_radius"				"350"
 		}
-	}
-	"item_vladmir_datadriven"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"item_datadriven"
-		"ID"							"1081"  //Valve's version of this item uses the ID "81".
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"Model"							"models/props_gameplay/red_box.vmdl" 
-		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
-		"AbilityTextureName"			"item_vladmir"
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"2075"
-		"ItemShopTags"					"lifesteal;damage;armor;regen_mana;regen_health"
-		"ItemQuality"					"rare"
-		"ItemAliases"					"vladmirs offering;vlads"
-	
-		"ItemKillable"					"1"
-		"ItemSellable"					"1"
-		"ItemPurchasable"				"1"
-		"ItemDroppable"					"1"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
-		"ItemStackable"					"0"
-		"ItemPermanent"					"0"
-		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
-		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
-		"ItemAlertable"					"1"
-	
-		"SideShop"						"0"
-		"SecretShop"					"0"
-		
-		"AbilitySpecial"
+		"02"
 		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"aura_radius"				"900"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"lifesteal_aura_percent"	"16"
-			}
-			"03"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"damage_aura_percent"		"15"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"armor_aura"				"5"
-			}
-			"05"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"mana_regen_aura"			"25.5"
-			}
-			"06"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"hp_regen"					"2"
-			}
+			"var_type"					"FIELD_INTEGER"
+			"splash_damage_percent"		"110"
 		}
-		
-		"Modifiers"
+	"03"
 		{
-	//=================================================================================================================
-	// Recipe: Arcane Boots
-	//=================================================================================================================
-	"item_recipe_arcane_boots2"
-	{
-		"ID"							"1005"
-	
-		"BaseClass"						"item_recipe_arcane_boots"
-	
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemCost"						"0"	
-		"ItemShopTags"					""
-		
-		// Recipe
-		//-------------------------------------------------------------------------------------------------------------
-		"ItemRecipe"					"1"
-		"ItemResult"					"item_arcane_boots2"
-		"ItemRequirements"
-		{
-			"01"						"item_energy_booster;item_arcane_boots"
+			"var_type"								"FIELD_INTEGER"
+			"bonus_stats"							"9"
 		}
-	}
-	"item_vladmir_datadriven_modifier"
+	"04"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"bonus_attack_speed"	"40"
+		}
+	"05"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"bonus_health_regen"	"11"
+		}
+		"06"
+		{
+			"var_type"								"FIELD_INTEGER"
+			"bonus_damage"							"13"
+		}
+		"07"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"bonus_armor"					"5"
+		}
+	"08"
+		{
+			"var_type"						"FIELD_INTEGER"
+			"movement_speed_percent_bonus"	"10"
+		}
+    }
+    	"Orb"
 			{
-				"Passive"			"1"
-				"IsHidden"			"0"
-				
-				"Properties"
+				"Priority"					"DOTA_ORB_PRIORITY_ITEM"
+				"ProjectileName"			"particles/units/heroes/hero_drow/drow_frost_arrow.vpcf"
+				"CastAttack"				"1"
+			}
+
+			"OnOrbFire"
+			{
+				"SpendMana"
 				{
-					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"			"%mana_regen_aura"
+					"Mana"					"%AbilityManaCost"
+				}
+				"FireSound"
+				{
+					"EffectName"			"Hero_DrowRanger.FrostArrows"
+					"Target"				"CASTER"
+				}
+			}
+
+			"OnOrbImpact"
+			{
+			   {
+				"RunScript"
+				{
+					"ScriptFile"	"scripts/vscripts/explosive_banjo.lua"
+					"Function"		"Splash"
 				}
 			}
 		}
-	}
+			}
+		}
+	"Modifiers"
+	{
+		"modifier_item_ancient_janggo_datadriven"
+		{
+			"Passive"			"1"
+			"IsHidden"			"1"
+			"Attributes" 		"MODIFIER_ATTRIBUTE_MULTIPLE"
+			
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"		"%bonus_stats"
+				"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"			"%bonus_stats"
+				"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"		"%bonus_stats"
+				"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"		"%bonus_damage"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_attack_speed"
+				"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"		"%bonus_health_regen"
+				"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"		"%bonus_damage"
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%bonus_armor"
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE_UNIQUE"			"%movement_speed_percent_bonus"
+				
+			}
+		}
+} 
 }
