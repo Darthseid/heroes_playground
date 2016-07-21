@@ -16,7 +16,7 @@ local caster = keys.caster
     end
 
     for k,itemSlot in pairs(slots) do	
-        caster:SwapItems(itemSlot,k+6)
+        caster:SwapItems(itemSlot,k+6) --makes the items permanently unavailable while still applying stats
     end
 end
 
@@ -38,7 +38,7 @@ local caster = keys.caster
     end
 	
     for k,itemSlot in pairs(slots) do
-        caster:SwapItems(itemSlot,k-6)		
+        caster:SwapItems(itemSlot,k-6)	--doesn't do much	
     end
 end
 
