@@ -1115,7 +1115,7 @@
 		"01"
 		{
 			"var_type"				"FIELD_FLOAT"
-			"xp_multiplier_allies"			"0.34 0.67 1"
+			"xp_multiplier_allies"			"1.34 1.67 2"
 		}
 		"02"
 		{
