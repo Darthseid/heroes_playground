@@ -1090,9 +1090,35 @@
 		}
 		"OnDestroy"
 		{
+		"ActOnTargets"
+				{
+					"Target"
+					{
+						"Center"  				"CASTER"
+						"Radius" 				"%jump_range"
+						"Teams" 				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+						"Types" 				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+						"MaxTargets" 			"1"
+						"Random" 				"1"
+					}
+
+					"Action"
+					{
+						"FireSound"
+						{
+							"EffectName"	"Hero_Gyrocopter.Rocket_Barrage.Launch"
+							"Target"		"CASTER"
+						}
+						
+						"FireSound"
+						{
+							"EffectName"	"Hero_Gyrocopter.Rocket_Barrage.Impact"
+							"Target"		"TARGET"
+						}
+						
 		"TrackingProjectile"
 		{
-			"Target"           	"Caster"
+			"Target"           	"TARGET"
 			"EffectName"		"particles/units/heroes/hero_lich/lich_chain_frost.vpcf"
 			"Dodgeable"			"1"
 			"ProvidesVision"	"1"
@@ -1155,7 +1181,9 @@
 			
 	}
 }
-
+}
+}
+}
 }
 
 	
