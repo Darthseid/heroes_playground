@@ -1184,6 +1184,79 @@
 }
 }
 }
+"appear_datadriven"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"				"ability_datadriven"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"AbilityTextureName"			"riki_blink_strike"
+	"CastFilterRejectCaster" 		"1"
+		  "MaxLevel"              "20"
+
+	// Precache
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"soundfile"			"sounds/weapons/hero/riki/riki_blinkstrike.vsnd"
+		"particle"			"particles/units/heroes/hero_riki/riki_blink_strike.vpcf"
+	}
+	
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastRange"				"300 400 500 600"
+	"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
+
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"16 12 8 4"
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"50 50 50 50"
+	
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"bonus_damage"			"20 40 60 80"
+		}
+		"02"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"tooltip_range"			"800 800 800 800"
+		}
+	}
+
+	"OnSpellStart"
+	{
+		"FireSound"
+		{
+			"EffectName"		"Hero_Riki.Blink_Strike"
+			"Target"			"CASTER"
+		}
+
+		"AttachEffect"
+		{
+			"EffectName"		"particles/units/heroes/hero_riki/riki_blink_strike.vpcf"
+			"EffectAttachType"	"follow_origin"
+			"Target"			"CASTER"
+		}
+		
+		"RunScript"
+		{
+			"ScriptFile"	"heroes/hero_riki/blink_strike.lua"
+			"Function"		"BlinkStrike"
+		}
+	}
+}
 }
 
 	
