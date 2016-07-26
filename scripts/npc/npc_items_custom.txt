@@ -84,7 +84,8 @@
 		}
     }
     	"Orb"
-			{
+		{
+			
 				"Priority"					"DOTA_ORB_PRIORITY_ITEM"
 				"ProjectileName"			"particles/units/heroes/hero_drow/drow_frost_arrow.vpcf"
 				"CastAttack"				"1"
@@ -105,16 +106,16 @@
 
 			"OnOrbImpact"
 			{
-			   {
+			   
 				"RunScript"
 				{
 					"ScriptFile"	"scripts/vscripts/explosive_banjo.lua"
 					"Function"		"Splash"
 				}
 			}
+		
 		}
-			}
-		}
+		
 	"Modifiers"
 	{
 		"modifier_item_ancient_janggo_datadriven"
