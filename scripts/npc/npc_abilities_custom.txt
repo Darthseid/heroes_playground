@@ -1235,16 +1235,40 @@
 	//-------------------------------------------------------------------------------------------------------------
 	"AbilitySpecial"
 	{
-		"01"
+	"01"
 		{
 			"var_type"				"FIELD_INTEGER"
-			"bonus_damage"			"20 40 60 80"
+			"radius"					"599"
+		}
 		}
 		"02"
 		{
-			"var_type"				"FIELD_INTEGER"
-			"tooltip_range"			"800 800 800 800"
+			"var_type"				"FIELD_FLOAT"
+			"miss_duration"			"4.0 5.0 6.0"
 		}
+		"03"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"knockback_distance"		"60 120 180 240 300 360 420 480 540 600 660 720 780 840 900 960 1020 1080 1140 1900"
+		}
+		"04"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"knockback_height"		"150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150  850"
+		}
+		"06"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"knockback_duration"	"0.15 0.3 0.45 0.55 0.7 0.85 1.00 1.15 1.3 1.45 1.6 1.75 1.9 2.05 2.2 2.35 2.5 2.65 2.8 2.95"
+		}
+		// Extra
+		"07"
+		{
+			"var_type"				"FIELD_FLOAT"
+			"tree_radius"			"150"
+		}
+	}
+
 	}
 
 	"OnSpellStart"
@@ -1267,6 +1291,66 @@
 			"ScriptFile"	"scripts/vscripts/appear.lua"
 			"Function"		"BlinkStrike"
 		}
+	"FireSound"
+		{
+			"EffectName"	"Hero_KeeperOfTheLight.BlindingLight"
+			"Target" 		"CASTER"
+		}
+		
+		"FireEffect"
+		{
+			"EffectName"        "particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_blinding_light_aoe.vpcf"
+			"EffectAttachType"  "start_at_customorigin"
+			"TargetPoint"		"POINT"
+
+			"ControlPoints"
+			{
+				"01"	"POINT"
+				"02"	"%radius 0 0"
+			}
+			
+		}
+		
+
+		"ActOnTargets"
+		{
+			"Target"
+			{
+				"Center"  	"POINT"
+				"Radius" 	"%radius"
+				"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			}
+		
+			"Action"    
+			{
+				"Knockback"
+				{
+					"Target"            "TARGET"
+					"Center" 	        "POINT"
+					"Distance"	        "%knockback_distance"
+					"Duration"	        "%knockback_duration"
+					"Height"	        "%knockback_height"
+					"IsFixedDistance"	"1"
+					"ShouldStun"        "1"	
+				}
+
+				"DelayedAction"
+				{
+					"Delay"     "%knockback_duration"
+					"Action"    
+					{
+						"DestroyTrees"
+						{
+							"Target" 		"TARGET"
+							"Radius"		"%tree_radius"
+						}
+						
+					}
+				}				
+			}
+		}		
+	}
 	}
 }
 }
