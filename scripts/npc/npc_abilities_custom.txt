@@ -868,7 +868,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"               "90 65 40 25"
+    "AbilityManaCost"               "25 40 55 65"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -1351,5 +1351,145 @@
 			}
 		}		
 	}
+	"chessmaster_pummel_datadriven"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"BaseClass"				"ability_datadriven"
+	"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_ALLY"
+	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ALLY"
+	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+	"AbilityTextureName"			"crystal_maiden_frostbite"
+
+	// Casting
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCastRange"				"509"
+	"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
+	
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"16 17 18 19"
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"45 45 45 45"
+
+	// Stats
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityModifierSupportValue"	"0.5"	// Applies multiple modifiers
+	
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"enemy_duration"			"3 4 5 6"
+		}
+			"02"
+		{
+			"var_type"			"FIELD_FLOAT"
+			"ally_duration"			"15 16 17 18"
+		}
+		"03"
+		{
+			"var_type"				"FIELD_INTEGER"
+			"max_attacks"			"1 1 1 1"
+		}
 	}
+	
+	// Data driven
+	//-------------------------------------------------------------------------------------------------------------
+	"precache"
+	{
+		"soundfile"				"soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts"
+		"particle"				"particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf"
+		"particle"				"particles/units/heroes/hero_crystalmaiden/maiden_frostbite.vpcf"
+	}
+	
+	"OnSpellStart"
+	{
+		"TrackingProjectile"
+		{
+			"Target"			"TARGET"
+			"EffectName"		"particles/units/heroes/hero_crystalmaiden/maiden_frostbite.vpcf"
+			"MoveSpeed"			"2000"
+		}
+		
+		"ApplyModifier"
+		{
+			"Target"
+			{
+				"Center"		"TARGET"
+				"Types"			"DOTA_UNIT_TARGET_HERO"
+			}
+			"ModifierName"		"modifier_frost_bite_root_datadriven"
+			"Duration"			"%ally_duration"
+		}
+		
+		"FireSound"
+		{
+			"Target"			"TARGET"
+			"EffectName"		"hero_Crystal.frostbite"
+		}
+	}
+	
+	"Modifiers"
+	{
+		"modifier_pummel_root_datadriven"
+		{
+			"IsPurgable"		"1"
+		
+			"EffectName"		"particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf"
+		
+			"States"
+			{
+				"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_INVISIBLE"	"MODIFIER_STATE_VALUE_DISABLED"
+				"MODIFIER_STATE_MUTED"           "MODIFIER_STATE_VALUE_ENABLED"
+			}
+			
+		}
+		"modifier_pummel_attack_datadriven"
+		{
+			"IsBuff"			"1"
+	
+			"EffectName"		"particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch_buff.vpcf"
+			"EffectAttachType"	"attach_attack1"
+
+			"OnDestroy"
+			{
+				"RemoveModifier"
+				{
+					"ModifierName"	"modifier_chilling_touch_attack_speed_datadriven"
+					"Target" 		"TARGET"
+				}
+			}
+
+			"OnAttackLanded"
+			{
+				"RemoveModifier"
+		{
+			"ModifierName"	"modifier_pummel_attack_datadriven"
+			"Target" 		"ATTACKER"
+		}
+	   	"ApplyModifier"
+		{
+			"Target"
+			{
+				"Center"		"TARGET"
+				"Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			}
+			"ModifierName"		"modifier_frost_bite_root_datadriven"
+			"Duration"			"%enemy_duration"
+		}
+	}
+      }
+	}
+ }
+}
 
